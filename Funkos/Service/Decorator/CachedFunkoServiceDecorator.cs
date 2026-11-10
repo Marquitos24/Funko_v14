@@ -4,7 +4,6 @@ using Funkos.Dto;
 using Funkos.Dto.Common;
 using Funkos.Dto.Funko;
 using Funkos.Errors;
-using Funkos.Models;
 
 namespace Funkos.Service.Decorator;
 
