@@ -80,7 +80,11 @@ app.UseAuthentication();  // Primero: quien eres?
 app.UseAuthorization();   // Segundo: que puedes hacer?
 
 app.MapHub<NotificacionesHub>("/hubs/notificaciones").RequireAuthorization(); // Requiere auth para todo el Hub
-
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxConcurrentConnections = 1000;          // conexiones HTTP totales
+    options.Limits.MaxConcurrentUpgradedConnections = 1000;  // de ellas, las que se han convertido en WebSocket
+});
 
 // Habilitar archivos estáticos desde wwwroot
 app.UseStaticFiles();

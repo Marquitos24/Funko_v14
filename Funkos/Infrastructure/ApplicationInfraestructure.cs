@@ -193,10 +193,9 @@ public static class ApplicationInfraestructure
         //Futuras actualizaciones:
             // - Añadir Requirements y handlers personalizados
         #endregion
-
-
+        
         #region SignalR y JWT
-        // Registrar SignalR + Mapearlo con autorizacion.
+        // Registrar SignalR + Mapearlo con autorizacion + Cache.
         services.AddSignalR().AddHubOptions<NotificacionesHub>(options =>
         {
             options.EnableDetailedErrors = true;  // Solo en desarrollo
