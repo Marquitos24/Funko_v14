@@ -3,14 +3,16 @@ using FluentValidation;
 using Funkos.Dto.Proveedor;
 using Funkos.Errors;
 using Funkos.Mappers;
+using Funkos.RealTime.Notificaciones;
 using Funkos.Repositories;
 using Proveedorr = Funkos.Models.Proveedor;
 using Funkos.Repositories.Proveedor;
+using Microsoft.AspNetCore.SignalR;
 using MongoDB.Bson;
 
 namespace Funkos.Service.Proveedor;
 
-public class ProveedorService(IProveedorRepository repository, IFunkoRepository funkoRepository, IValidator<ProveedorCreateDto> validatorCreateAsync, IValidator<ProveedorUpdateDto> validatorUpdateAsync, ILogger<ProveedorService> logger ) : IProveedorService
+public class ProveedorService(IProveedorRepository repository, IFunkoRepository funkoRepository, IValidator<ProveedorCreateDto> validatorCreateAsync, IValidator<ProveedorUpdateDto> validatorUpdateAsync, ILogger<ProveedorService> logger,  IHubContext<NotificacionesHub> hubContext ) : IProveedorService
 {
     public async Task<Result<IEnumerable<ProveedorDtoResponse>, DomainErrors>>  GetAllAsync(CancellationToken cancellationToken)
     {
@@ -62,6 +64,14 @@ public class ProveedorService(IProveedorRepository repository, IFunkoRepository 
         Proveedorr proveedor = await repository.CreateAsync(model, cancellationToken);
         ProveedorDtoResponse provResponse = ProveedorMapper.ToDtoResponse(proveedor);
         logger.LogInformation("Proveedor Creado correctamente");
+        
+        await hubContext.Clients.Group("admins").SendAsync("ProveedorCreado", new 
+        { 
+            proveedor.Id, 
+            proveedor.Name,
+            Mensaje = $"Se ha creado el Proveedor: {proveedor.Id} ({proveedor.Name})"
+        });
+        
         return Result.Success<ProveedorDtoResponse, DomainErrors>(provResponse);
     }
     
@@ -109,6 +119,13 @@ public class ProveedorService(IProveedorRepository repository, IFunkoRepository 
         //Transformamos a ResponseDTO
         ProveedorDtoResponse provResponse = ProveedorMapper.ToDtoResponse(proveedorr);
         logger.LogInformation("Proveedor {id} actualizdo correctamente", id);
+        
+        await hubContext.Clients.Group("admins").SendAsync("ProveedorActualizado", new 
+        { 
+            Id = id,
+            Mensaje = $"El Proveedor con ID {id} ha sido actualizado." 
+        });
+        
         //Devolvemos
         return Result.Success<ProveedorDtoResponse, DomainErrors>(provResponse);
     }
@@ -131,6 +148,12 @@ public class ProveedorService(IProveedorRepository repository, IFunkoRepository 
 
         if (!deleted) return Result.Failure<bool, DomainErrors>(ProveedorError.NotFound(proveedorId.Name));
         logger.LogInformation("Proveedor {id} eliminado correctamente", id);
+        
+        await hubContext.Clients.Group("admins").SendAsync("ProveedorEliminado", new 
+        { 
+            Id = id,
+            Mensaje = $"El Proveedor con ID {id} ha sido eliminado." 
+        });
         return Result.Success<bool, DomainErrors>(true);
     }
 }

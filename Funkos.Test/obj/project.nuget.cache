@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8Obv9mkhg8U=",
+  "dgSpecHash": "eYoP21ugI+8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Marcos\\Documents\\Proyectos\\Back-end\\C#\\Funkos\\Funkos.Test\\Funkos.Test.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "C:\\Users\\Marcos\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\messagepack\\2.5.303\\messagepack.2.5.303.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\messagepack.annotations\\2.5.303\\messagepack.annotations.2.5.303.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.applicationinsights\\2.22.0\\microsoft.applicationinsights.2.22.0.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.14\\microsoft.aspnetcore.authentication.jwtbearer.10.0.14.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\10.0.14\\microsoft.aspnetcore.cryptography.internal.10.0.14.nupkg.sha512",
@@ -19,6 +21,7 @@
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\10.0.14\\microsoft.aspnetcore.identity.entityframeworkcore.10.0.14.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.mvc.testing\\10.0.12\\microsoft.aspnetcore.mvc.testing.10.0.12.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.12\\microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.signalr.stackexchangeredis\\10.0.14\\microsoft.aspnetcore.signalr.stackexchangeredis.10.0.14.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.testhost\\10.0.12\\microsoft.aspnetcore.testhost.10.0.12.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.bcl.cryptography\\10.0.2\\microsoft.bcl.cryptography.10.0.2.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.codecoverage\\17.14.0\\microsoft.codecoverage.17.14.0.nupkg.sha512",
@@ -65,6 +68,7 @@
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.identitymodel.protocols\\8.19.2\\microsoft.identitymodel.protocols.8.19.2.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\8.19.2\\microsoft.identitymodel.protocols.openidconnect.8.19.2.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.23.0\\microsoft.identitymodel.tokens.8.23.0.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.net.stringtools\\17.6.3\\microsoft.net.stringtools.17.6.3.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.net.test.sdk\\17.14.0\\microsoft.net.test.sdk.17.14.0.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.openapi\\2.12.0\\microsoft.openapi.2.12.0.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.testing.extensions.telemetry\\1.5.3\\microsoft.testing.extensions.telemetry.1.5.3.nupkg.sha512",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2Z9X+JRUimI=",
+  "dgSpecHash": "gKKAkgvlYYo=",
   "success": true,
   "projectFilePath": "C:\\Users\\Marcos\\Documents\\Proyectos\\Back-end\\C#\\Funkos\\Funkos\\Funkos.csproj",
   "expectedPackageFiles": [
@@ -10,9 +10,12 @@
     "C:\\Users\\Marcos\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\messagepack\\2.5.303\\messagepack.2.5.303.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\messagepack.annotations\\2.5.303\\messagepack.annotations.2.5.303.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.14\\microsoft.aspnetcore.authentication.jwtbearer.10.0.14.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\10.0.14\\microsoft.aspnetcore.identity.entityframeworkcore.10.0.14.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.12\\microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
+    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.signalr.stackexchangeredis\\10.0.14\\microsoft.aspnetcore.signalr.stackexchangeredis.10.0.14.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.bcl.cryptography\\10.0.2\\microsoft.bcl.cryptography.10.0.2.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.build\\17.7.2\\microsoft.build.17.7.2.nupkg.sha512",
     "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.build.framework\\17.14.28\\microsoft.build.framework.17.14.28.nupkg.sha512",

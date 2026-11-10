@@ -43,19 +43,7 @@ public static class FunkoMapper
     
     public static List<FunkosDtoResponse> ToDtoList(this IEnumerable<Funko> funkos) =>
         funkos.Select(f => f.ToDtoResponse()).ToList();
-    
-    public static FunkosConCategoriaDtoResponse ToListDtoResponse(this Funko funko) => new FunkosConCategoriaDtoResponse(
-        funko.Id,
-        funko.Name,
-        funko.Precio,
-        funko.CategoriaId,
-        funko.Categoria.Name,
-        funko.ProveedorId,
-        funko.Stock,
-        funko.CreateAt,
-        funko.UpdateAt,
-        funko.DeleteAt
-    );
+
     
     public static FunkoParaCategoriaDto ToDtoParaCategoria(this Funko funko) => new FunkoParaCategoriaDto(
         funko.Id,

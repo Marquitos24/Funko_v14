@@ -2,6 +2,8 @@ using System.Text.Json.Serialization;
 using FluentValidation;
 using Funkos.Infrastructure;
 using Funkos.Infrastructure.Seed;
+using Funkos.Middleware;
+using Funkos.RealTime.Notificaciones;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,7 +57,6 @@ builder.WebHost.ConfigureKestrel(options =>
 });
 #endregion
 
-
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
@@ -78,12 +79,20 @@ app.UseExceptionHandler();
 app.UseAuthentication();  // Primero: quien eres?
 app.UseAuthorization();   // Segundo: que puedes hacer?
 
+app.MapHub<NotificacionesHub>("/hubs/notificaciones").RequireAuthorization(); // Requiere auth para todo el Hub
+
 
 // Habilitar archivos estáticos desde wwwroot
 app.UseStaticFiles();
-
 Console.WriteLine($"WebRootPath: {app.Environment.WebRootPath}"); // Salida: C:\...\Funkos\wwwroot
 Console.WriteLine($"ContentRootPath: {app.Environment.ContentRootPath}"); // Salida: C:\...\Funkos
+
+app.UseRateLimiter();
+app.UseMiddleware<RateLimitMiddleware>();
+
+app.UseCors("Clientes");
+
+// SignalR publica bajo esta ruta: POST /hubs/productos/negotiate
 
 app.MapControllers();
 app.Run();

@@ -6,6 +6,7 @@ using Funkos.Errors;
 using Funkos.Helper;
 using Funkos.Service.Storage;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Funkos.Controller;
 
@@ -15,6 +16,7 @@ public class FunkoController(IFunkoService service, ILogger<FunkoController> _lo
     : ControllerBase
 {
     [HttpGet]
+    [EnableRateLimiting("api")]
     public async Task<ActionResult<List<FunkosDtoResponse>>> GetAllAsync([FromQuery] FunkoFilterDto filter,
         CancellationToken cancellationToken)
     {

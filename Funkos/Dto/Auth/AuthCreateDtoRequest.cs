@@ -26,6 +26,21 @@ public record AuthCreateDtoRequest
 }
 
 /// <summary>
+/// DTO para el inicio de sesión de usuarios.
+/// Credenciales necesarias para obtener token JWT.
+/// </summary>
+public record LoginRequest
+{
+    [Required(ErrorMessage = "El nombre de usuario es obligatorio")]
+    public string Username { get; init; } = string.Empty;
+    
+    [Required(ErrorMessage = "La contraseña es obligatoria")]
+    public string Password { get; set; } = string.Empty;
+}
+
+
+/*
+/// <summary>
 /// DTO para actualizar datos de usuario.
 /// </summary>
 public record AuthUpdateDtoRequest
@@ -44,16 +59,5 @@ public record AuthUpdateDtoRequest
     [StringLength(100, MinimumLength = 1, ErrorMessage = "La contraseña no puede exceder 100 caracteres")]
     public string Password { get; set; } = string.Empty;
 }
+ */
 
-/// <summary>
-/// DTO para el inicio de sesión de usuarios.
-/// Credenciales necesarias para obtener token JWT.
-/// </summary>
-public record LoginRequest
-{
-    [Required(ErrorMessage = "El nombre de usuario es obligatorio")]
-    public string Username { get; init; } = string.Empty;
-    
-    [Required(ErrorMessage = "La contraseña es obligatoria")]
-    public string Password { get; set; } = string.Empty;
-}

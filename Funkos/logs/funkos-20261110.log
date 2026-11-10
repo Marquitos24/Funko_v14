@@ -1,0 +1,111 @@
+2026-11-10 03:20:51.875 +01:00 [FTL] Application startup exception
+System.InvalidOperationException: Scheme already exists: Bearer
+   at Microsoft.AspNetCore.Authentication.AuthenticationOptions.AddScheme(String name, Action`1 configureBuilder)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.UnnamedOptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Authentication.AuthenticationSchemeProvider..ctor(IOptions`1 options, IDictionary`2 schemes)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2026-11-10 03:20:51.919 +01:00 [ERR] Hosting failed to start
+System.InvalidOperationException: Scheme already exists: Bearer
+   at Microsoft.AspNetCore.Authentication.AuthenticationOptions.AddScheme(String name, Action`1 configureBuilder)
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at Microsoft.Extensions.Options.UnnamedOptionsManager`1.get_Value()
+   at Microsoft.AspNetCore.Authentication.AuthenticationSchemeProvider..ctor(IOptions`1 options, IDictionary`2 schemes)
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-11-10 03:33:01.994 +01:00 [INF] Usuario admin encontrado
+2026-11-10 03:33:02.238 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T02:33:02.2283222Z"
+2026-11-10 03:34:12.975 +01:00 [INF] Listar Categorias
+2026-11-10 03:37:13.492 +01:00 [INF] Usuario user encontrado
+2026-11-10 03:37:13.754 +01:00 [INF] Usuario user con inicio de sesion el "2026-11-10T02:37:13.6221520Z"
+2026-11-10 03:37:23.850 +01:00 [INF] Usuario admin encontrado
+2026-11-10 03:37:23.917 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T02:37:23.9043451Z"
+2026-11-10 03:41:17.266 +01:00 [INF] Usuario admin encontrado
+2026-11-10 03:41:17.368 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T02:41:17.3615363Z"
+2026-11-10 03:41:41.267 +01:00 [INF] Usuario admin encontrado
+2026-11-10 03:41:41.362 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T02:41:41.3573009Z"
+2026-11-10 03:43:46.159 +01:00 [INF] Usuario admin encontrado
+2026-11-10 03:43:46.260 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T02:43:46.2477206Z"
+2026-11-10 03:44:17.262 +01:00 [INF] Buscando Funko 3
+2026-11-10 03:44:17.356 +01:00 [WRN] Funko 3 NO encontrado 
+2026-11-10 03:44:35.413 +01:00 [WRN] Funko NO creado 
+2026-11-10 03:44:35.415 +01:00 [WRN] Ya existe el funko
+2026-11-10 03:44:35.435 +01:00 [INF] Archivo guardado: 20261110024435_7711c724d4fc451d.png (95534 bytes)
+2026-11-10 03:44:35.589 +01:00 [INF] Funko Creado correctamente
+2026-11-10 03:44:35.938 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 03:46:19.117 +01:00 [INF] Proveedor Creado correctamente
+2026-11-10 03:46:19.218 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 03:47:08.437 +01:00 [INF] Proveedor Creado correctamente
+2026-11-10 03:47:08.442 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 11:50:12.216 +01:00 [INF] Usuario admin encontrado
+2026-11-10 11:50:12.590 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T10:50:12.3149814Z"
+2026-11-10 11:51:19.656 +01:00 [INF] Usuario admin encontrado
+2026-11-10 11:51:19.926 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T10:51:19.7876448Z"
+2026-11-10 11:52:02.934 +01:00 [INF] Buscando Funko 12
+2026-11-10 11:52:02.975 +01:00 [WRN] Funko 12 NO encontrado 
+2026-11-10 11:55:13.166 +01:00 [INF] Buscando Funko 8
+2026-11-10 11:55:13.172 +01:00 [WRN] Funko 8 NO encontrado 
+2026-11-10 11:58:51.616 +01:00 [INF] Funko 8 actualizdo correctamente
+2026-11-10 11:58:51.645 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 11:58:51.654 +01:00 [INF] CACHE HIT: Registro GetById Invalidado
+2026-11-10 11:59:31.742 +01:00 [INF] Obteniendo Funkos paginados - Página: 0, Tamaño: 10
+2026-11-10 12:02:30.215 +01:00 [INF] Funko 8 actualizdo correctamente
+2026-11-10 12:02:30.301 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 12:02:30.320 +01:00 [INF] CACHE HIT: Registro GetById Invalidado
+2026-11-10 12:06:50.034 +01:00 [INF] Obteniendo Funkos paginados - Página: 0, Tamaño: 10
+2026-11-10 12:07:23.060 +01:00 [INF] Usuario admin encontrado
+2026-11-10 12:07:23.434 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T11:07:23.4066951Z"
+2026-11-10 12:07:36.296 +01:00 [WRN] Funko 5 eliminado correctamente
+2026-11-10 12:07:36.320 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 12:07:36.347 +01:00 [INF] CACHE HIT: Registro GetById Invalidado
+2026-11-10 12:08:18.008 +01:00 [WRN] Funko NO creado 
+2026-11-10 12:08:18.015 +01:00 [WRN] Ya existe el funko
+2026-11-10 12:08:18.384 +01:00 [INF] Funko Creado correctamente
+2026-11-10 12:08:18.402 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 12:10:23.073 +01:00 [INF] Buscando Proveedor 6aea3644970e44112a37f3c5
+2026-11-10 12:10:23.254 +01:00 [WRN] Proveedor 6aea3644970e44112a37f3c5 NO encontrado 
+2026-11-10 12:10:33.811 +01:00 [INF] Listar Proveedores
+2026-11-10 12:11:04.438 +01:00 [INF] Proveedor 6aea3735970e44112a37f3c7 actualizdo correctamente
+2026-11-10 12:11:04.480 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 12:11:04.495 +01:00 [INF] CACHE HIT: Registro GetById Invalidado
+2026-11-10 12:11:50.603 +01:00 [INF] Usuario admin encontrado
+2026-11-10 12:11:50.895 +01:00 [INF] Usuario admin con inicio de sesion el "2026-11-10T11:11:50.8756646Z"
+2026-11-10 12:13:25.239 +01:00 [INF] Listar Proveedores
+2026-11-10 12:13:41.614 +01:00 [INF] Proveedor 6aea381d970e44112a37f3c9 eliminado correctamente
+2026-11-10 12:13:41.631 +01:00 [INF] CACHE HIT: Registro GetAll Invalidado
+2026-11-10 12:13:41.642 +01:00 [INF] CACHE HIT: Registro GetById Invalidado

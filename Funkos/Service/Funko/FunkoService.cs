@@ -6,14 +6,16 @@ using Funkos.Dto.Funko;
 using Funkos.Errors;
 using Funkos.Mappers;
 using Funkos.Models;
+using Funkos.RealTime.Notificaciones;
 using Funkos.Repositories;
 using Funkos.Service.Storage;
 using Funkos.Validations;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Funkos.Service;
 
-public class FunkoService(IFunkoRepository repository, IValidator<FunkoCreateDto> _validatorCreateAsync, IValidator<FunkoUpdateDto> _validatorUpdateAsync, ILogger<FunkoService> logger, IStorageService storage ) : IFunkoService
+public class FunkoService(IFunkoRepository repository, IValidator<FunkoCreateDto> _validatorCreateAsync, IValidator<FunkoUpdateDto> _validatorUpdateAsync, ILogger<FunkoService> logger, IStorageService storage,  IHubContext<NotificacionesHub> hubContext) : IFunkoService
 {
     /*
      * public async Task<Result<List<FunkosConCategoriaDtoResponse>, DomainErrors>>  GetAllAsync(CancellationToken cancellationToken)
@@ -100,6 +102,15 @@ public class FunkoService(IFunkoRepository repository, IValidator<FunkoCreateDto
         Funko funko = await repository.CreateAsync(model, cancellationToken);
         FunkosDtoResponse funkoResponse = FunkoMapper.ToDtoResponse(funko);
         logger.LogInformation("Funko Creado correctamente");
+        
+        // Notificar a todos los usuarios
+        await hubContext.Clients.All.SendAsync("FunkoCreado", new 
+        { 
+            funko.Id, 
+            funko.Name,
+            Mensaje = $"Se ha creado el Funko: {funko.Id} ({funko.Name})"
+        });
+        
         return Result.Success<FunkosDtoResponse, DomainErrors>(funkoResponse);
     }
     
@@ -151,6 +162,7 @@ public class FunkoService(IFunkoRepository repository, IValidator<FunkoCreateDto
         {
             // Si no se adjunta nueva imagen en el Update, mantenemos la que ya tenía guardada
             funkoModel.Imagen = funkoId.Imagen;
+            if(funkoId.Imagen is null){funkoModel.Imagen = "/uploads/funkos/default.png";}
         }
         
        
@@ -163,6 +175,14 @@ public class FunkoService(IFunkoRepository repository, IValidator<FunkoCreateDto
            //Transformamos a ResponseDTO
            FunkosDtoResponse funkoResponse = FunkoMapper.ToDtoResponse(funko);
            logger.LogInformation("Funko {id} actualizdo correctamente", id);
+           
+           // Notificar a admins
+           await hubContext.Clients.Group("admins").SendAsync("FunkoActualizado", new 
+           { 
+               Id = id,
+               Mensaje = $"El Funko con ID {id} ha sido actualizado." 
+           });
+           
            //Devolvemos
            return Result.Success<FunkosDtoResponse, DomainErrors>(funkoResponse);
        }
@@ -198,8 +218,16 @@ public class FunkoService(IFunkoRepository repository, IValidator<FunkoCreateDto
                 var fileName = Path.GetFileName(funkoId.Imagen);
                 await storage.DeleteAsync(fileName, "funkos", cancellationToken);
             }
-            
             logger.LogWarning("Funko {id} eliminado correctamente", id);
+            
+            // Notificar a admins
+            await hubContext.Clients.Group("admins").SendAsync("FunkoEliminado", new 
+            { 
+                Id = id,
+                Mensaje = $"El Funko con ID {id} ha sido eliminado." 
+            });
+
+            
             return Result.Success<bool, DomainErrors>(true);
         }
         catch (DbUpdateConcurrencyException ex)

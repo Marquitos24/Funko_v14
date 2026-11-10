@@ -1,10 +1,13 @@
 ﻿using System.Text;
+using System.Threading.RateLimiting;
 using FluentValidation;
 using Funkos.Cache;
 using Funkos.DbContext;
 using Funkos.Infrastructure.Storage;
+using Funkos.Middleware;
 using Funkos.Models;
 using Funkos.Mongo;
+using Funkos.RealTime.Notificaciones;
 using Funkos.Repositories;
 using Funkos.Repositories.Categoria;
 using Funkos.Repositories.Proveedor;
@@ -23,6 +26,7 @@ using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using StackExchange.Redis;
+using RateLimitPartition = System.Threading.RateLimiting.RateLimitPartition;
 using Role = Funkos.Models.Role;
 
 namespace Funkos.Infrastructure;
@@ -188,6 +192,116 @@ public static class ApplicationInfraestructure
         
         //Futuras actualizaciones:
             // - Añadir Requirements y handlers personalizados
+        #endregion
+
+
+        #region SignalR y JWT
+        // Registrar SignalR + Mapearlo con autorizacion.
+        services.AddSignalR().AddHubOptions<NotificacionesHub>(options =>
+        {
+            options.EnableDetailedErrors = true;  // Solo en desarrollo
+        })
+            // Junto a Redis --> Redis Backplane
+        .AddStackExchangeRedis("localhost:6379", options =>
+        {
+            options.Configuration.ChannelPrefix = "FunkosApp";
+        });
+        
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // SignalR admite también el token por query string
+        services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
+            {
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+
+                        // Solo extraer el token de la query si la petición va dirigida a un Hub de SignalR
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            path.StartsWithSegments("/hubs"))
+                        {
+                            context.Token = accessToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+        
+        #endregion
+
+        #region CORS
+        services.AddCors(options =>
+        {
+            options.AddPolicy("Clientes", policy =>
+                policy.WithOrigins("http://localhost:5175")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());  // ¡Imprescindible para SignalR!
+        });
+        #endregion
+
+        #region RateLimit
+        // Añade los servicios de limitación de tasa (Rate Limiting) al contenedor de dependencias de la aplicación
+        services.AddRateLimiter(options =>{
+
+            // Define una política de control de tráfico llamada "api" (pensada para usuarios generales/IPs)
+            options.AddPolicy("api", context =>
+            {
+                // Obtiene la dirección IP del cliente que hace la petición; si no se puede determinar, usa "unknown"
+                var ip = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+                
+                // Crea una partición de límite de tasa basada en la IP utilizando una ventana fija (Fixed Window)
+                return RateLimitPartition.GetFixedWindowLimiter(
+                    ip,
+                    partition => new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 100,                                    // Máximo de 100 peticiones permitidas por ventana de tiempo
+                        Window = TimeSpan.FromMinutes(1),                     // Duración de la ventana de tiempo (1 minuto)
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst // Si hay cola, las peticiones más antiguas se procesan primero
+                    });
+            });
+
+            // Define otra política llamada "premium" (enfocada a usuarios autenticados/identificados por su token)
+            options.AddPolicy("premium", context =>
+            {
+                // Busca el claim "sub" (ID de usuario) en el token JWT; si no está logueado, se le trata como "anonymous"
+                var userId = context.User.FindFirst("sub")?.Value ?? "anonymous";
+                
+                // Crea una partición de límite de tasa usando el ID del usuario con una ventana fija más permisiva
+                return RateLimitPartition.GetFixedWindowLimiter(
+                    userId,
+                    partition => new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1000,                  // Máximo de 1000 peticiones permitidas por ventana
+                        Window = TimeSpan.FromMinutes(1)     // Duración de la ventana de tiempo (1 minuto)
+                    });
+            });
+
+            // Configura qué ocurre globalmente cuando un usuario supera el límite permitido (Exceso de peticiones)
+            options.OnRejected = async (context, cancellationToken) =>
+            {
+                // Cambia el código de estado HTTP de la respuesta a 429 Too Many Requests (Demasiadas solicitudes)
+                context.HttpContext.Response.StatusCode = 429;
+                
+                // Escribe una respuesta personalizada en formato JSON informando del error al cliente
+                await context.HttpContext.Response.WriteAsJsonAsync(new
+                {
+                    error = "Demasiadas peticiones. Intenta de nuevo más tarde.",
+                    
+                    // Intenta extraer del sistema cuánto tiempo exacto debe esperar el cliente para reintentar
+                    retryAfter = context.Lease.TryGetMetadata(
+                        MetadataName.RetryAfter, out var retryAfter)
+                        ? retryAfter.TotalSeconds   // Si existe el dato, devuelve los segundos de espera
+                        : (double?)null             // Si no, devuelve nulo
+                }, cancellationToken);
+            };
+        });
+        
+        // Para el Middleware
+        services.AddSingleton<RateLimitingState>(); // particiones (IP + verbo + ruta)
         #endregion
         
         return services;

@@ -211,3 +211,6 @@ C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\
 C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\MessagePack.dll
+C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\MessagePack.Annotations.dll
+C:\Users\Marcos\Documents\Proyectos\Back-end\C#\Funkos\Funkos\bin\Debug\net10.0\Microsoft.AspNetCore.SignalR.StackExchangeRedis.dll

@@ -4,6 +4,7 @@ using Funkos.Helper;
 using Funkos.Service.Categoria;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Funkos.Controller;
 
@@ -13,6 +14,7 @@ namespace Funkos.Controller;
 public class CategoriaController(ICategoriaService service, ILogger<CategoriaController> logger) : ControllerBase
 {
     [HttpGet]
+    [EnableRateLimiting("api")]
     public async Task<ActionResult<List<CategoriaDtoResponse>>> GetAllAsync(CancellationToken cancellationToken)
     {
         var resultado = await service.GetAllAsync(cancellationToken);
